@@ -1,0 +1,4 @@
+data/obj_train_data/Snap-20-Image Export-12.tif
+data/obj_train_data/Snap-21-Image Export-13.tif
+data/obj_train_data/Snap-23-Image Export-15.tif
+data/obj_train_data/Snap-24-Image Export-16.tif
