@@ -216,3 +216,10 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Modelos, dados e logs do SLURM
+*.pth
+*.pt
+*.zip
+*.out
+*.err
