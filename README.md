@@ -12,22 +12,33 @@ A biblioteca recebe as imagens das placas e retorna as medidas de cada indivídu
 
 > **Projeto em desenvolvimento.** Atualmente, o repositório contém o treino e a avaliação dos modelos de detecção (etapa 1) e uma primeira versão do pipeline de medição, que combina detecção, recorte e Daphnia Ruler, ainda sem filtros de processamento. As demais etapas serão incorporadas ao longo do projeto.
 
+---
+
 ## Organização do repositório
 
 Para a etapa de detecção, foram treinadas e comparadas duas arquiteturas: o **YOLO11n**, um modelo leve e de inferência rápida, e o **Faster R-CNN**, um detector de dois estágios. Cada uma possui sua própria pasta em `training/`.
 
-A pasta `pipeline/` contém a avaliação do pipeline completo sem filtros. Ela identifica quais *Daphnias* já são medidas corretamente pelo Daphnia Ruler, para que os filtros de processamento sejam aplicados apenas às restantes.
+A pasta `pipeline/` contém a avaliação do pipeline completo sem filtros. Ela identifica quais Daphnias já são medidas corretamente pelo Daphnia Ruler, para que os filtros de processamento sejam aplicados apenas às restantes.
 
-```
-training/
-├── yolo/
-└── faster_rcnn/
-pipeline/
-├── avaliar_pipeline_completo.py
-├── common.py
-└── slurm/
-```
-
-## Referências
-
-- Daphnia Ruler: https://github.com/nelstevens/The-Daphnia-ruler
+```text
+.
+├── training/
+│   ├── faster_rcnn/
+│   │   ├── environment.yml
+│   │   ├── train_fasterrcnn.py
+│   │   ├── evaluate_fasterrcnn.py
+│   │   ├── submit_train_fasterrcnn.sh
+│   │   └── submit_eval_fasterrcnn.sh
+│   └── yolo/
+│       ├── environment.yml
+│       ├── train_yolo.py
+│       ├── evaluate_yolo.py
+│       ├── submit_train_yolo.sh
+│       └── submit_eval_yolo.sh
+└── pipeline/
+    ├── environment.yml
+    ├── avaliar_pipeline_completo.py
+    ├── common.py
+    └── slurm/
+        ├── submit_avaliar_pipeline_faster.sh
+        └── submit_avaliar_pipeline_yolo.sh
