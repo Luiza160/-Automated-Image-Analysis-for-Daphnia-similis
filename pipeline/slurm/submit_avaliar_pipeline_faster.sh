@@ -27,9 +27,10 @@ conda activate pipeline_env
 cd "$REPO"
 
 python avaliar_pipeline_completo.py \
-    --cvat_zip "$CVAT_ZIP" \
-    --model_type fasterrcnn \
+    --cvat-zip "$CVAT_ZIP" \
+    --format coco \
+    --model-type fasterrcnn \
     --checkpoint "$CHECKPOINT" \
-    --output_dir "$OUT_WORKDIR"
+    --workdir "$OUT_WORKDIR"
 
 echo "=== Finalizado com sucesso! ==="
