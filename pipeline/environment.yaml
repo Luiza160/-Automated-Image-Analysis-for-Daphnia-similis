@@ -1,0 +1,20 @@
+name: pipeline_env
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - pytorch=2.1.2
+  - torchvision=0.16.2
+  - pytorch-cuda=12.1
+  - numpy=1.26.4
+  - pillow=10.2.0
+  - pandas=2.2.1
+  - matplotlib=3.8.3
+  - pip:
+    - ultralytics==8.1.24
+    - --extra-index-url https://test.pypi.org/simple/
+    - daphruler==0.1.0
