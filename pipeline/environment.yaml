@@ -15,6 +15,9 @@ dependencies:
   - pandas=2.2.1
   - matplotlib=3.8.3
   - pip:
+    - opencv-python-headless
     - ultralytics==8.1.24
+    - basicsr==1.4.2
+    - realesrgan==0.3.0
     - --extra-index-url https://test.pypi.org/simple/
     - daphruler==0.1.0
