@@ -190,27 +190,31 @@ def main():
                     "image_name": image_path.name,
                     "confianca_deteccao": round(score, 4),
                     "diagonal_caixa_px": diagonal_caixa_px,
-                    "largura_caixa_px": box_width, 
-                    "altura_caixa_px": box_height
-                    "x1": x1, 
-                    "y1": y1, 
-                    "x2": x2, 
-                    "y2": y2
+                    "largura_caixa_px": box_width,
+                    "altura_caixa_px": box_height,
+                    "x1": x1,
+                    "y1": y1,
+                    "x2": x2,
+                    "y2": y2,
                 })
             total_detections += 1
-
-            csv_path = crops_dir / "crop_metadata.csv" 
-            with open(csv_path, "w", newline="", encoding="utf-8") as csvfile: 
-                fieldnames = [ "crop_name", "image_name", "confianca_deteccao", "x1", "y1", "x2", "y2", "largura_caixa_px", "altura_caixa_px", "diagonal_caixa_px"] 
-                writer = csv.DictWriter(csvfile, fieldnames=fieldnames) 
-                writer.writeheader() 
-                writer.writerows(crop_metadata) 
-                print(f"CSV salvo em: {csv_path}") 
-                print(f"Total de detecções: {len(crop_metadata)}")
 
         print(f"  {image_path.name}: {len(boxes)} detecção(ões)")
 
     print(f"\nTotal de {total_detections} Daphnias detectados e recortados em {len(image_paths)} imagens")
+
+    # Metadados dos recortes (salvos uma única vez, depois de processar todas as imagens)
+    csv_path = crops_dir / "crop_metadata.csv"
+    fieldnames = [
+        "crop_name", "image_name", "confianca_deteccao",
+        "x1", "y1", "x2", "y2",
+        "largura_caixa_px", "altura_caixa_px", "diagonal_caixa_px",
+    ]
+    with open(csv_path, "w", newline="", encoding="utf-8") as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(crop_metadata)
+    print(f"CSV salvo em: {csv_path} ({len(crop_metadata)} detecções)")
 
     # 5. Rodar o Daphnia Ruler em todos os recortes de uma vez. Se falhar
     #    (bug conhecido do daphruler: quebra quando UM item retorna None
