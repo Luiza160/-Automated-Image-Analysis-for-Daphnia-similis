@@ -11,20 +11,17 @@
 set -euo pipefail
 
 # Variáveis configuráveis de caminhos
-REPO="$HOME/daphnia-repo/pipeline"
-CVAT_ZIP="$HOME/datasets/dataset.zip"
-CHECKPOINT="$HOME/daphnia_runs/yolo_run1/yolo_run/weights/best_real.pt"
-OUT_WORKDIR="$HOME/daphnia_runs/avaliacao_cascata_yolo"
-REALESRGAN_WEIGHTS="$REPO/weights/RealESRGAN_x4plus.pth"
+CVAT_ZIP="${CVAT_ZIP:?Defina CVAT_ZIP com um caminho absoluto}"
+CHECKPOINT="${CHECKPOINT:?Defina CHECKPOINT com um caminho absoluto}"
+OUT_WORKDIR="${WORKDIR:?Defina WORKDIR com um caminho absoluto}"
+REALESRGAN_WEIGHTS="${REALESRGAN_WEIGHTS:?Defina REALESRGAN_WEIGHTS com um caminho absoluto}"
 
 echo "=== Iniciando Pipeline em Cascata (YOLO + Real-ESRGAN) ==="
 echo "Data: $(date)"
 echo "Node: $(hostname)"
 
-source ~/.bashrc
-conda activate pipeline_env
 
-cd "$REPO"
+cd "${PROJECT_ROOT:-${SLURM_SUBMIT_DIR:-$PWD}}/pipeline"
 
 export PYTHONUNBUFFERED=1
 

@@ -227,3 +227,13 @@ pipeline/avaliacao_*/
 pipeline/_teste_isolamento/
 *.out
 *.err
+
+# Dados, pesos e saídas locais
+/data/
+/weights/
+/runs/
+*.pt
+*.pth
+
+/direct/jobs/
+/app/resultados_daphnia/

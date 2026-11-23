@@ -49,7 +49,7 @@ def load_model(checkpoint_path, device):
     num_classes = checkpoint["num_classes"]
 
     # Recria a mesma arquitetura do treino e carrega os pesos salvos
-    model = fasterrcnn_resnet50_fpn_v2(weights=None)
+    model = fasterrcnn_resnet50_fpn_v2(weights=None, weights_backbone=None)
     in_features = model.roi_heads.box_predictor.cls_score.in_features
     model.roi_heads.box_predictor = FastRCNNPredictor(in_features, num_classes)
     model.load_state_dict(checkpoint["model_state_dict"])

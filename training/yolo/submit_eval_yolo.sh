@@ -1,6 +1,5 @@
 #!/bin/bash
 #SBATCH --job-name=yolo_eval
-#SBATCH --partition=gpu
 #SBATCH --gres=gpu:1
 #SBATCH --cpus-per-task=2
 #SBATCH --mem=8G
@@ -10,14 +9,12 @@
 
 set -euo pipefail
 
-source ~/miniconda3/etc/profile.d/conda.sh
-conda activate yolo_env
 
 # --- paths (devem bater com o submit_train_yolo.sh) ---
-CVAT_ZIP="$HOME/datasets/dataset.zip"
-WORKDIR="$HOME/daphnia_runs/yolo_run1"
+CVAT_ZIP="${CVAT_ZIP:?Defina CVAT_ZIP com um caminho absoluto}"
+WORKDIR="${WORKDIR:?Defina WORKDIR com um caminho absoluto}"
 
-cd "$HOME/daphnia-repo/training/yolo"
+cd "${PROJECT_ROOT:-${SLURM_SUBMIT_DIR:-$PWD}}/training/yolo"
 
 python evaluate_yolo.py \
     --workdir "$WORKDIR" \

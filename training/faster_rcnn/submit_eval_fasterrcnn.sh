@@ -1,6 +1,5 @@
 #!/bin/bash
 #SBATCH --job-name=fasterrcnn_eval
-#SBATCH --partition=gpu
 #SBATCH --gres=gpu:1
 #SBATCH --cpus-per-task=2
 #SBATCH --mem=8G
@@ -10,14 +9,12 @@
 
 set -euo pipefail
 
-source ~/miniconda3/etc/profile.d/conda.sh
-conda activate fasterrcnn_env
 
 # --- caminhos (WORKDIR deve ser o mesmo do submit_train_fasterrcnn.sh) ---
-CVAT_ZIP="$HOME/datasets/dataset.zip"
-WORKDIR="$HOME/daphnia_runs/fasterrcnn_run1"
+CVAT_ZIP="${CVAT_ZIP:?Defina CVAT_ZIP com um caminho absoluto}"
+WORKDIR="${WORKDIR:?Defina WORKDIR com um caminho absoluto}"
 
-cd "$HOME/daphnia-repo/training/faster_rcnn"
+cd "${PROJECT_ROOT:-${SLURM_SUBMIT_DIR:-$PWD}}/training/faster_rcnn"
 
 python evaluate_fasterrcnn.py \
     --workdir "$WORKDIR" \

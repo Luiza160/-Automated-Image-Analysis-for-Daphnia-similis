@@ -100,7 +100,7 @@ def load_fasterrcnn(checkpoint_path, device):
     checkpoint = torch.load(checkpoint_path, map_location=device)
     num_classes = checkpoint.get("num_classes", 2)
 
-    model = fasterrcnn_resnet50_fpn_v2(weights=None)
+    model = fasterrcnn_resnet50_fpn_v2(weights=None, weights_backbone=None)
     in_features = model.roi_heads.box_predictor.cls_score.in_features
     model.roi_heads.box_predictor = FastRCNNPredictor(in_features, num_classes)
 
